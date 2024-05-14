@@ -1,3 +1,4 @@
+#include "get_next_line.h"
 
 static char	*ft_join(char *text, char *line)
 {
@@ -34,9 +35,30 @@ static char	*read_file(int fd, char *text)
 	return(text);
 }
 
-static char	*next_line(int fd, char *buffer)
+static char	
+
+static char	*next_line(char *buffer)
 {
-	
+	int	i;
+	int	j;
+	char	*line;
+
+	i = ft_strlen(buffer) + 1;
+	j = i;
+	while (buffer[j] != '\n' && j > 0))
+	{
+		j--;
+	}
+	line = ft_calloc((i - j + 1), sizeof(char));
+	i = 0;
+	while (buffer[j] != '\0')
+	{
+		line[i] = buffer[j];
+		i++;
+		j++;
+	}
+	free (buffer);
+	return (line);
 }
 
 char	*get_next_line(int fd)
@@ -49,6 +71,7 @@ char	*get_next_line(int fd)
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
-	
-
+	line = next_line(buffer);
+	buffer = line;
+	return (line);
 }
