@@ -6,7 +6,7 @@
 /*   By: paperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:28:48 by paperez-          #+#    #+#             */
-/*   Updated: 2024/05/16 13:31:57 by paperez-         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:57:40 by paperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*next_line(char *buffer)
 	{
 		j--;
 	}
-	line = ft_calloc((i - j + 1), sizeof(char));
+	line = ft_calloc((i - j + 2), sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -69,6 +69,7 @@ static char	*next_line(char *buffer)
 		i++;
 		j++;
 	}
+	line[i] = '\n';
 	return (line);
 }
 
@@ -83,13 +84,19 @@ static char	*rmfirstline(char *buffer, char *line)
 	while(buffer[i] == line[i])
 		i++;
 	newbuf  = ft_calloc(j - i + 1, sizeof(char));
+	if (!newbuf)
+	{
+		free(buffer);
+		return (NULL);
+	}
 	j = 0;
-	while(buffer && buffer != '\n')
+	while(buffer[i] && buffer[i] != '\n')
 	{
 		newbuf[j] = buffer[i];
 		i++;
 		j++;
 	}
+	newbuf[j] = '\n';
 	free(buffer);
 	return (newbuf);
 }
@@ -114,7 +121,7 @@ char	*get_next_line(int fd)
 int main()
 {
 	char *line;
-	line = get_next_line(0);
+	line = get_next_line(1);
 	printf("%s", line);
 	return (0);
 }
