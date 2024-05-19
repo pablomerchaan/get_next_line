@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 static char	*ft_join(char *text, char *line)
 {
 	char	*tmp;
 
 	tmp = ft_strjoin(text, line);
-	free(text);
 	return(tmp);
 }
 
@@ -38,11 +39,11 @@ static char	*read_file(int fd, char *text)
 			free(buffer);
 			return(NULL);
 		}
-		buffer[byte_read] = '\0';
-		text = ft_join(text, buffer);
+		text = ft_strjoin(text, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break;
 	}
+//	printf("este es el buffer en esta ejecucion: %s \n", text);
 	free(buffer);
 	return(text);
 }
@@ -54,22 +55,22 @@ static char	*next_line(char *buffer)
 	char	*line;
 
 	i = ft_strlen(buffer) + 1;
-	j = i;
-	while (buffer[j] != '\n' && j > 0)
+	j = 0;
+	while (buffer[j] != '\n' && j < i)
 	{
-		j--;
+		j++;
 	}
-	line = ft_calloc((i - j + 2), sizeof(char));
+	line = ft_calloc((j + 2), sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
-	while (buffer[j] != '\0')
+	while (buffer[i] != '\n' && buffer[i])
 	{
-		line[i] = buffer[j];
+		line[i] = buffer[i];
 		i++;
-		j++;
 	}
-	line[i] = '\n';
+	line[i] = '\0';
+//	printf("esta es la linea en esta ejecucion %s \n", line);
 	return (line);
 }
 
@@ -79,10 +80,8 @@ static char	*rmfirstline(char *buffer, char *line)
 	int	j;
 	char	*newbuf;
 
-	i = 0;
+	i = ft_strlen(line);
 	j = ft_strlen(buffer);
-	while(buffer[i] == line[i])
-		i++;
 	newbuf  = ft_calloc(j - i + 1, sizeof(char));
 	if (!newbuf)
 	{
@@ -90,14 +89,13 @@ static char	*rmfirstline(char *buffer, char *line)
 		return (NULL);
 	}
 	j = 0;
-	while(buffer[i] && buffer[i] != '\n')
+	while(buffer[i + j] && buffer[i + j] != '\0')
 	{
-		newbuf[j] = buffer[i];
-		i++;
+		newbuf[j] = buffer[i + j + 1];
 		j++;
 	}
-	newbuf[j] = '\n';
-	free(buffer);
+	newbuf[j] = '\0';
+//	printf("este es el newbuf de esta ejecucion %s", newbuf);
 	return (newbuf);
 }
 
@@ -113,15 +111,21 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = next_line(buffer);
 	buffer = rmfirstline(buffer, line);
+	printf("este es el newbuf al final de esta ejecucion %s.\n", buffer);
 	return (line);
 }
 
-#include <stdio.h>
 
 int main()
 {
 	char *line;
-	line = get_next_line(1);
-	printf("%s", line);
+	int i = 0;
+	int fd = open("get_next_line.c", O_RDONLY);
+	while (i < 6)
+	{
+		line = get_next_line(fd);
+		printf("esta es la %i linea: %s.\n", i, line);
+		i++;
+	}
 	return (0);
 }

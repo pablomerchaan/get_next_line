@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 void    *ft_calloc(size_t count, size_t size)
 {
@@ -52,6 +53,7 @@ char    *ft_strjoin(char const *s1, char const *s2)
 
         i = 0;
         j = 0;
+//	printf("s2: %s \n", s1);
         while (s1[i])
                 i++;
         while (s2[j])
@@ -59,14 +61,21 @@ char    *ft_strjoin(char const *s1, char const *s2)
         str = (char *)malloc(sizeof(char) * (i + j + 1));
         if (!str)
                 return (NULL);
-        i = -1;
-        while (s1[++i])
+        i = 0;
+        while (s1[i] != '\n' && s1[i] != '\0')
+	{
                 str[i] = s1[i];
-        j = -1;
-        while (s2[++j])
+		i++;
+        }
+	j = 0;
+        while (s2[j] != '\0')
+	{
                 str[i + j] = s2[j];
-        str[i + j] = '\0';
-        return (str);
+		j++;
+	}
+	str[i + j] = '\0';
+//	printf("esta es el textjoin: %s\n", str);
+	return (str);
 }
 
 size_t  ft_strlen(const char *s)
