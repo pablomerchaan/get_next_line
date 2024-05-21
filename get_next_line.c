@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
-#include <stdlib.h>
+#include <fcntl.h>
 
 static char	*ft_join(char *text, char *line)
 {
@@ -89,11 +89,13 @@ static char	*rmfirstline(char *buffer, char *line)
 		return (NULL);
 	}
 	j = 0;
-	while(buffer[i + j] && buffer[i + j] != '\0')
+	while(buffer[i + j + 1] && buffer[i + j + 1] != '\0')
 	{
 		newbuf[j] = buffer[i + j + 1];
 		j++;
 	}
+	if (!newbuf)
+		return (NULL);
 	newbuf[j] = '\0';
 //	printf("este es el newbuf de esta ejecucion %s", newbuf);
 	return (newbuf);
@@ -107,11 +109,11 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
-	if (!buffer)
-		return (NULL);
+	if (!buffer || buffer[0] == '\0')
+		return (0);
 	line = next_line(buffer);
 	buffer = rmfirstline(buffer, line);
-	printf("este es el newbuf al final de esta ejecucion %s.\n", buffer);
+//	printf("este es el newbuf al final de esta ejecucion %s.\n", buffer);
 	return (line);
 }
 
@@ -120,8 +122,8 @@ int main()
 {
 	char *line;
 	int i = 0;
-	int fd = open("get_next_line.c", O_RDONLY);
-	while (i < 6)
+	int fd = open("prueba.txt", O_RDONLY);
+	while (i < 16)
 	{
 		line = get_next_line(fd);
 		printf("esta es la %i linea: %s.\n", i, line);
