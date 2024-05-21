@@ -39,6 +39,7 @@ static char	*read_file(int fd, char *text)
 			free(buffer);
 			return(NULL);
 		}
+		buffer[byte_read] = 0;
 		text = ft_strjoin(text, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break;

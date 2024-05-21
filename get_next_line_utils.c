@@ -53,7 +53,7 @@ char    *ft_strjoin(char const *s1, char const *s2)
 
         i = 0;
         j = 0;
-//	printf("s2: %s \n", s1);
+//	printf("s2: %s \n", s2);
         while (s1[i])
                 i++;
         while (s2[j])
