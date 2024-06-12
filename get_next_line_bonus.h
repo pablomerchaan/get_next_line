@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:29:11 by paperez-          #+#    #+#             */
-/*   Updated: 2024/06/05 17:34:00 by paperez-         ###   ########.fr       */
+/*   Created: 2024/06/05 17:32:07 by paperez-          #+#    #+#             */
+/*   Updated: 2024/06/05 17:33:01 by paperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 22
+#define BUFFER_SIZE = 10
 #endif
 
-char	*get_next_line(int fd);
+char    *get_next_line(int fd);
 size_t  ft_strlen(const char *s);
 char    *ft_strjoin(char const *s1, char const *s2);
 void    *ft_calloc(size_t count, size_t size);
 char    *ft_strchr(const char *s, int c);
 
 #endif
+

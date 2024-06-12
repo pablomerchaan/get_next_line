@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:29:27 by paperez-          #+#    #+#             */
-/*   Updated: 2024/06/10 14:15:48 by paperez-         ###   ########.fr       */
+/*   Created: 2024/06/05 17:36:30 by paperez-          #+#    #+#             */
+/*   Updated: 2024/06/05 17:36:48 by paperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char    *ft_strjoin(char const *s1, char const *s2)
 
         i = 0;
         j = 0;
-//	printf("s2: %s \n", s2);
         while (s1[i])
                 i++;
         while (s2[j])
@@ -74,7 +73,6 @@ char    *ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	str[i + j] = '\0';
-//	printf("esta es el textjoin: %s\n", str);
 	return (str);
 }
 
@@ -86,4 +84,3 @@ size_t  ft_strlen(const char *s)
                 ++p;
         return (p - s);
 }
-
