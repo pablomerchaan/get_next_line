@@ -6,7 +6,7 @@
 /*   By: paperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:28:48 by paperez-          #+#    #+#             */
-/*   Updated: 2024/09/05 17:36:19 by paperez-         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:17:15 by paperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static char	*ft_join(char *text, char *line)
 	char	*tmp;
 
 	tmp = ft_strjoin(text, line);
-	free(text);
-	return(tmp);
+	free (text);
+	return (tmp);
 }
 
 static char	*read_file(int fd, char *text)
 {
 	char	*buffer;
-	int	byte_read;
+	int		byte_read;
 
 	if (!text)
 	{
@@ -40,22 +40,21 @@ static char	*read_file(int fd, char *text)
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read == -1)
 		{
-			free(buffer);
-			return(NULL);
+			free (buffer);
+			return (NULL);
 		}
 		buffer[byte_read] = 0;
 		text = ft_join(text, buffer);
 		if (ft_strchr(buffer, '\n'))
-			break;
+			break ;
 	}
-	free(buffer);
-//	printf("este es el buffer en esta ejecucion: %s \n", text);
-	return(text);
+	free (buffer);
+	return (text);
 }
 
 static char	*next_line(char *buffer)
 {
-	int	i;
+	int		i;
 	char	*line;
 
 	i = 0;
@@ -77,15 +76,14 @@ static char	*next_line(char *buffer)
 	}
 	else
 		line[i] = '\0';
-//	printf("esta es la linea en esta ejecucion %s \n", line);
 	return (line);
 }
 
 static char	*rmfirstline(char *buffer)
 {
-	int	i;
-	int	j;
 	char	*newbuf;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
@@ -96,22 +94,21 @@ static char	*rmfirstline(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	newbuf  = ft_calloc(sizeof(char), j - i + 1);
+	newbuf = ft_calloc(sizeof(char), j - i + 1);
 	j = 0;
 	i++;
-	while(buffer[i] != '\0')
+	while (buffer[i] != '\0')
 		newbuf[j++] = buffer[i++];
 	if (!newbuf)
 		return (NULL);
-	free(buffer);
+	free (buffer);
 	newbuf[j] = '\0';
-//	printf("este es el newbuf de esta ejecucion %s", newbuf);
 	return (newbuf);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*line;
+	char		*line;
 	static char	*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -121,11 +118,9 @@ char	*get_next_line(int fd)
 		return (0);
 	line = next_line(buffer);
 	buffer = rmfirstline(buffer);
-//	printf("este es el newbuf al final de esta ejecucion %s.\n", buffer);
 	return (line);
 }
-
-
+/*
 int main()
 {
 	char *line;
@@ -146,4 +141,4 @@ int main()
 	close(fd);
 	free(line);
 	return (0);
-}
+}*/
