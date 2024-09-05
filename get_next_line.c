@@ -29,8 +29,12 @@ static char	*read_file(int fd, char *text)
 	int	byte_read;
 
 	if (!text)
-		text = ft_calloc(1, 1);
+	{
+		text = ft_calloc(1, sizeof(char));
+		text[0] = '\0';
+	}
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	byte_read = 1;
 	while (byte_read > 0)
 	{
 		byte_read = read(fd, buffer, BUFFER_SIZE);
@@ -44,6 +48,7 @@ static char	*read_file(int fd, char *text)
 		if (ft_strchr(buffer, '\n'))
 			break;
 	}
+	free(buffer);
 //	printf("este es el buffer en esta ejecucion: %s \n", text);
 	return(text);
 }
@@ -66,7 +71,12 @@ static char	*next_line(char *buffer)
 		i++;
 	}
 	if (buffer[i] == '\n')
+	{
 		line[i] = '\n';
+		line[i + 1] = '\0';
+	}
+	else
+		line[i] = '\0';
 //	printf("esta es la linea en esta ejecucion %s \n", line);
 	return (line);
 }
@@ -94,6 +104,7 @@ static char	*rmfirstline(char *buffer)
 	if (!newbuf)
 		return (NULL);
 	free(buffer);
+	newbuf[j] = '\0';
 //	printf("este es el newbuf de esta ejecucion %s", newbuf);
 	return (newbuf);
 }
@@ -126,10 +137,13 @@ int main()
 		perror("fucked");
 		return 1;
 	}
-	while (line = get_next_line(fd))
+	line = get_next_line(fd);
+	while (line)
 	{
 		printf("%s", line);
+		line = get_next_line(fd);
 	}
 	close(fd);
+	free(line);
 	return (0);
 }
