@@ -6,7 +6,7 @@
 /*   By: paperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:29:27 by paperez-          #+#    #+#             */
-/*   Updated: 2024/09/05 19:13:12 by paperez-         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:50:01 by paperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 	char	*res;
 	int		c;
 
-	c = (int) count;
+	c = (int) count - 1;
 	res = malloc(count * size);
 	while (c >= 0)
 	{

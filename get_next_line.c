@@ -6,7 +6,7 @@
 /*   By: paperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:28:48 by paperez-          #+#    #+#             */
-/*   Updated: 2024/09/16 13:39:25 by paperez-         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:06:21 by paperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
-	if (!buffer)
+	if (!buffer || buffer[0] == '\0')
 		return (0);
 	line = next_line(buffer);
 	buffer = rmfirstline(buffer);
@@ -126,7 +126,7 @@ int main()
 	char *line;
 	int fd;
 	
-	fd = open("prueba.txt", O_RDONLY);
+	fd = open("pruebaa.txt", O_RDONLY);
 	if (fd == -1)
 	{
 		perror("fucked");
@@ -136,6 +136,7 @@ int main()
 	while (line)
 	{
 		printf("%s", line);
+		free (line);
 		line = get_next_line(fd);
 	}
 	close(fd);
