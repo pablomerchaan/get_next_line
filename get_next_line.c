@@ -6,7 +6,7 @@
 /*   By: paperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:28:48 by paperez-          #+#    #+#             */
-/*   Updated: 2024/09/05 19:17:15 by paperez-         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:39:25 by paperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
-	if (!buffer || buffer[0] == '\0')
+	if (!buffer)
 		return (0);
 	line = next_line(buffer);
 	buffer = rmfirstline(buffer);
 	return (line);
 }
-/*
+
 int main()
 {
 	char *line;
@@ -141,4 +141,4 @@ int main()
 	close(fd);
 	free(line);
 	return (0);
-}*/
+}

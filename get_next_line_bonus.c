@@ -6,11 +6,11 @@
 /*   By: paperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:28:48 by paperez-          #+#    #+#             */
-/*   Updated: 2024/09/05 19:14:11 by paperez-         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:37:07 by paperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdio.h>
 #include <fcntl.h>
 
